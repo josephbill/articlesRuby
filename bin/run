@@ -1,0 +1,103 @@
+require_relative '../config/environment'
+
+
+# Create some authors
+author1 = Author.new('John Doe')
+author2 = Author.new('Jane Smith')
+
+# Create some magazines
+magazine1 = Magazine.new('Sports Illustrated', 'Sports')
+magazine2 = Magazine.new('Time', 'News')
+
+# Add some articles
+author1.add_article(magazine1, 'The Future of Sports')
+author2.add_article(magazine1, 'Athletes and Mental Health')
+author1.add_article(magazine2, 'The Politics of Climate Change')
+
+# Test out some methods
+puts author1.name # => "John Doe"  
+puts author1.articles.count # => 2
+puts author1.magazines.count # => 2
+puts author1.topic_areas # => ["Sports", "News"]
+
+puts magazine1.name # => "Sports Illustrated"
+puts magazine1.category # => "Sports"
+puts magazine1.contributors.count # => 2
+puts magazine1.article_titles # => ["The Future of Sports", "Athletes and Mental Health"]
+puts magazine1.contributing_authors.count # => 1
+
+all_magazines = Magazine.all
+puts all_magazines
+
+
+puts "------------------------------------------------------------------------------"
+puts "------------------------------------------------------------------------------"
+puts "------------------------------------------------------------------------------"
+puts "---------------------------------NEW SECTION WITH ALL OUTPUTS---------------------------------------------"
+
+
+# Creating a new Author object
+author1 = Author.new("John Doe")
+
+# Creating a new Magazine object
+magazine1 = Magazine.new("Sports Illustrated", "Sports")
+
+# Creating a new Article object
+article1 = Article.new(author1, magazine1, "The Best Team in the League")
+
+# Accessing the author of an article
+author = article1.author
+puts author.name
+# Output: "John Doe"
+
+# Accessing the magazine of an article
+magazine = article1.magazine
+puts magazine.name
+# Output: "Sports Illustrated"
+
+# Creating another Magazine object
+magazine2 = Magazine.new("National Geographic", "Nature")
+
+# Creating another Article object with a different author and magazine
+author2 = Author.new("Jane Smith")
+article2 = Article.new(author2, magazine2, "Discovering New Species")
+
+# Accessing all Article objects
+articles = Article.all
+puts articles
+# Output: [#<Article:0x000001ca272adec8>, #<Article:0x000001ca272ad5c8>]
+
+puts "hello ====================================="
+# Adding a new article for an author and magazine
+author1.add_article(magazine1, "The Super Bowl Champions")
+
+# Verify that the new article was added to the author's list of articles
+puts author1.articles.include?(article1)   # Output: true
+
+# Verify that the new article was added to the magazine's list of contributors
+puts magazine1.contributors.include?(author1)   # Output: true
+# Accessing all Article objects written by a particular author
+author_articles = author1.articles
+puts author_articles
+# Output: [#<Article:0x000001ca272adec8>]
+
+# Accessing all unique Magazine objects that an author has contributed to
+author_magazines = author1.magazines
+puts author_magazines
+# Output: [#<Magazine:0x000001ca272aea98>]
+
+# Accessing all Author objects who have written for a particular magazine
+magazine_contributors = magazine1.contributors
+puts magazine_contributors
+# Output: [#<Author:0x000001ca272a9f68>]
+
+# Adding a new article for an author and magazine
+author1.add_article(magazine1, "The Super Bowl Champions")
+author2.add_article(magazine2,"Here We go")
+
+hello = author2.articles
+puts "----------------------"
+puts hello
+hello.each do |article|
+  puts article.title
+end
